@@ -4,6 +4,8 @@
 # === Основные бинарные файлы Unreal Engine ===
 *.uasset filter=lfs diff=lfs merge=lfs -text
 *.umap filter=lfs diff=lfs merge=lfs -text
+*.UASSET filter=lfs diff=lfs merge=lfs -text
+*.UMAP filter=lfs diff=lfs merge=lfs -text
 
 # === 3D-модели и анимации ===
 *.fbx filter=lfs diff=lfs merge=lfs -text
@@ -11,6 +13,12 @@
 *.blend filter=lfs diff=lfs merge=lfs -text
 *.3ds filter=lfs diff=lfs merge=lfs -text
 *.dae filter=lfs diff=lfs merge=lfs -text
+*.FBX filter=lfs diff=lfs merge=lfs -text
+*.OBJ filter=lfs diff=lfs merge=lfs -text
+*.BLENF filter=lfs diff=lfs merge=lfs -text
+*.3DS filter=lfs diff=lfs merge=lfs -text
+*.DAE filter=lfs diff=lfs merge=lfs -text
+
 
 # === Текстуры и изображения ===
 *.png filter=lfs diff=lfs merge=lfs -text
@@ -25,6 +33,18 @@
 *.tiff filter=lfs diff=lfs merge=lfs -text
 *.bmp filter=lfs diff=lfs merge=lfs -text
 *.ico filter=lfs diff=lfs merge=lfs -text
+*.PNG filter=lfs diff=lfs merge=lfs -text
+*.JPG filter=lfs diff=lfs merge=lfs -text
+*.JPEG filter=lfs diff=lfs merge=lfs -text
+*.TGA filter=lfs diff=lfs merge=lfs -text
+*.PSD filter=lfs diff=lfs merge=lfs -text
+*.EXR filter=lfs diff=lfs merge=lfs -text
+*.HDR filter=lfs diff=lfs merge=lfs -text
+*.DDS filter=lfs diff=lfs merge=lfs -text
+*.TIF filter=lfs diff=lfs merge=lfs -text
+*.TIFF filter=lfs diff=lfs merge=lfs -text
+*.BMP filter=lfs diff=lfs merge=lfs -text
+*.ICO filter=lfs diff=lfs merge=lfs -text
 
 # === Аудио и видео ===
 *.wav filter=lfs diff=lfs merge=lfs -text
@@ -34,10 +54,19 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
 *.avi filter=lfs diff=lfs merge=lfs -text
+*.WAV filter=lfs diff=lfs merge=lfs -text
+*.MP3 filter=lfs diff=lfs merge=lfs -text
+*.OGG filter=lfs diff=lfs merge=lfs -text
+*.FLAC filter=lfs diff=lfs merge=lfs -text
+*.MP4 filter=lfs diff=lfs merge=lfs -text
+*.MOV filter=lfs diff=lfs merge=lfs -text
+*.AVI filter=lfs diff=lfs merge=lfs -text
 
 # === Шрифты ===
 *.ttf filter=lfs diff=lfs merge=lfs -text
 *.otf filter=lfs diff=lfs merge=lfs -text
+*.TTF filter=lfs diff=lfs merge=lfs -text
+*.OTF filter=lfs diff=lfs merge=lfs -text
 
 # === Бинарные библиотеки и архивы ===
 *.dll filter=lfs diff=lfs merge=lfs -text
@@ -49,3 +78,12 @@
 *.7z filter=lfs diff=lfs merge=lfs -text
 *.rar filter=lfs diff=lfs merge=lfs -text
 *.pak filter=lfs diff=lfs merge=lfs -text
+*.DLL filter=lfs diff=lfs merge=lfs -text
+*.SO filter=lfs diff=lfs merge=lfs -text
+*.DYLIB filter=lfs diff=lfs merge=lfs -text
+*.LIB filter=lfs diff=lfs merge=lfs -text
+*.A filter=lfs diff=lfs merge=lfs -text
+*.ZIP filter=lfs diff=lfs merge=lfs -text
+*.7Z filter=lfs diff=lfs merge=lfs -text
+*.RAR filter=lfs diff=lfs merge=lfs -text
+*.PAK filter=lfs diff=lfs merge=lfs -text
