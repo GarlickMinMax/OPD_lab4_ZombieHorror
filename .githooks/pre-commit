@@ -1,0 +1,66 @@
+#!/bin/sh
+
+
+LIMIT_BYTES=$((50 * 1024 * 1024))
+ERROR=0
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$STAGED_FILES" ]; then
+    exit 0
+fi
+
+# 1. Проверка запрещённых служебных папок Unreal Engine
+echo "$STAGED_FILES" | while IFS= read -r file; do
+    [ -z "$file" ] && continue
+    case "$file" in
+        Saved/*|*/Saved/*|\
+        Intermediate/*|*/Intermediate/*|\
+        Binaries/*|*/Binaries/*|\
+        DerivedDataCache/*|*/DerivedDataCache/*|\
+        .vs/*|*/.vs/*)
+            echo "ОШИБКА [pre-commit]: Запрещено коммитить файл из служебной папки UE: '$file'" >&2
+            exit 1
+            ;;
+    esac
+done
+if [ $? -ne 0 ]; then
+    ERROR=1
+fi
+
+# 2. Проверка размера файлов (> 50 МБ) и наличия трекинга через Git LFS
+echo "$STAGED_FILES" | while IFS= read -r file; do
+    [ -z "$file" ] && continue
+
+    # Пропускаем удалённые из рабочей директории пути, если такие встретятся
+    if [ ! -f "$file" ]; then
+        continue
+    fi
+
+    # Получаем размер файла в байтах (POSIX / GNU / macOS / Git Bash)
+    size=$(wc -c < "$file" 2>/dev/null)
+    if [ -z "$size" ]; then
+        continue
+    fi
+
+    if [ "$size" -gt "$LIMIT_BYTES" ]; then
+        lfs_attr=$(git check-attr filter -- "$file" 2>/dev/null | sed -n 's/.*: filter: //p')
+        if [ "$lfs_attr" != "lfs" ]; then
+            size_mb=$((size / 1024 / 1024))
+            echo "ОШИБКА [pre-commit]: Файл '$file' весит ~${size_mb} МБ (больше 50 МБ) и не настроен в Git LFS (filter='$lfs_attr')." >&2
+            echo "Добавьте расширение в .gitattributes для LFS или удалите файл из индекса (git reset HEAD \"$file\")." >&2
+            exit 1
+        fi
+    fi
+done
+if [ $? -ne 0 ]; then
+    ERROR=1
+fi
+
+if [ "$ERROR" -ne 0 ]; then
+    echo "" >&2
+    echo "Коммит отклонён хуком pre-commit. Исправьте указанные проблемы и повторите попытку." >&2
+    exit 1
+fi
+
+exit 0
